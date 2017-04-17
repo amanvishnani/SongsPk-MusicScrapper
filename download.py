@@ -2,7 +2,7 @@ import urllib
 import re
 import sqlite3
 
-conn = sqlite3.connect('music1.sqlite3')
+conn = sqlite3.connect('music.sqlite3')
 
 #updateCoverPictures()
 def updateCoverPictures():
@@ -35,7 +35,7 @@ def getAllSongsList():
         cur.execute('select * from Songs')
     except:
         print "Creating Songs Table"
-        cur.execute('CREATE TABLE Songs (song_id INTEGER PRIMARY KEY AUTOINCREMENT, movie_id INTEGER, song TEXT, url TEXT, FOREIGN KEY (movie_id) REFERENCES Movies(movie_id))')
+        cur.execute('CREATE TABLE Songs (song_id INTEGER PRIMARY KEY AUTOINCREMENT, movie_id INTEGER, song TEXT, url TEXT, UNIQUE(movie_id,song), FOREIGN KEY (movie_id) REFERENCES Movies(movie_id))')
     cur.execute('SELECT * FROM Movies')
     for row in cur:
         movie = row[0]
@@ -52,7 +52,7 @@ def getAllSongsList():
                     songURL = re.findall('<a href="(.+?)"',link)[0]
                     songName = re.findall('>(.+?)<',link)[0]
                     print (movie,songName,songURL)
-                    cur1.execute('INSERT INTO Songs (movie_id,song,url) VALUES (?,?,?)',(movie,songName,songURL))
+                    cur1.execute('INSERT or IGNORE INTO Songs (movie_id,song,url) VALUES (?,?,?)',(movie,songName,songURL))
                     cover = re.findall('<img data-retina="" src="(.+?)"',content)[0]
                     cur1.execute('UPDATE Movies SET cover=? WHERE movie_id=?',(cover,movie))
                 except:
