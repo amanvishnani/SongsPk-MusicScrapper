@@ -74,7 +74,7 @@ def getAllMoviesList():
     myopener = MyOpener()
     for page in pages:
         print "Started List for ", page
-        url = 'http://www.songspk.cloud/indian_movie/'+page+'_List.html'
+        url = 'https://www.songspk.cloud/indian_movie/'+page+'_List.html'
         content = myopener.open(url)
         tags = re.findall('<li class="list">.*?</li>',content.read())
         print "Processing Tags for ", page
