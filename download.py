@@ -58,6 +58,7 @@ def getAllSongsList():
                 except:
                     pass
             conn.commit()
+            
 # getAllMoviesList
 def getAllMoviesList():
     cur = conn.cursor()
