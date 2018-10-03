@@ -58,6 +58,7 @@ def getAllSongsList():
                 except:
                     pass
             conn.commit()
+            
 # getAllMoviesList
 def getAllMoviesList():
     cur = conn.cursor()
@@ -66,7 +67,6 @@ def getAllMoviesList():
     except:
         print "Creating Movies Table"
         cur.execute('CREATE TABLE Movies (movie_id INTEGER PRIMARY KEY AUTOINCREMENT, movie TEXT, url TEXT, cover TEXT)')
-
     movies = list()
     pages = ['0-9', 'A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
     class MyOpener(urllib.FancyURLopener):
