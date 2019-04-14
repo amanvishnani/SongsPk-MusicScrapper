@@ -2,7 +2,7 @@
 
 This Python Script will scrap out all the Songs URL from SongsPK and store it in a SQLite3 Database.
 ## Requirements
-- Python 2.x
+- Python 3.x
 
 ## How to run?
 - Clone this repository `git clone`
