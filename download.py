@@ -46,7 +46,7 @@ def getAllSongsList():
         cur1.execute('SELECT song FROM Songs WHERE movie_id = ?',(movie,))
         if not cur1.fetchone():
             content = requests.get(url)
-            links = re.findall('<td class="songs-bitrate-1"><i class="fa fa-music"></i>(.+?)<em>',content)
+            links = re.findall('<td class="songs-bitrate-1"><i class="fa fa-music"></i>(.+?)<em>',content.text)
             for link in links:
                 try:
                     songURL = re.findall('<a href="(.+?)"',link)[0]
@@ -74,9 +74,9 @@ def getAllMoviesList():
     # myopener = MyOpener()
     for page in pages:
         print("Started List for ", page)
-        url = 'https://www.songspk.cloud/indian_movie/'+page+'_List.html'
+        url = 'https://www.songspk.run/indian_movie/'+page+'_List.html'
         content = requests.get(url)
-        tags = re.findall('<li class="list">.*?</li>',content.read())
+        tags = re.findall('<li class="list">.*?</li>',content.text)
         print("Processing Tags for", page)
         for tag in tags:
             movieName = re.findall('<a href=".*?">(.*?)</a>',tag)[0]
